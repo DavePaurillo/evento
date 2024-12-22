@@ -15,7 +15,7 @@ export default async function Events({
 
 	return (
 		<main className='flex flex-col items-center py-24 px-[20px] min-h-[110vh]'>
-			<H1>
+			<H1 className='mb-28'>
 				{city === "all"
 					? "Events in all cities"
 					: `Events in ${city.charAt(0).toUpperCase() + city.slice(1)}`}
