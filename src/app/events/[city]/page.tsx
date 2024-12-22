@@ -1,4 +1,5 @@
-import { EventoEvent } from "@/app/types"
+import { EventoEvent } from "@/lib/types"
+import EventsList from "@/components/events-list"
 import H1 from "@/components/h1"
 import React from "react"
 
@@ -15,14 +16,12 @@ export default async function Events({
 	return (
 		<main className='flex flex-col items-center py-24 px-[20px] min-h-[110vh]'>
 			{city === "all" ? (
-				"All Events"
+				<H1>Events in all cities</H1>
 			) : (
 				<H1>Events in {city.charAt(0).toUpperCase() + city.slice(1)}</H1>
 			)}
 
-			{events.map((event) => {
-				return <div key={event.id}>{event.name}</div>
-			})}
+			<EventsList events={events} />
 		</main>
 	)
 }
