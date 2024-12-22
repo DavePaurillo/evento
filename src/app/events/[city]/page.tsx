@@ -15,11 +15,11 @@ export default async function Events({
 
 	return (
 		<main className='flex flex-col items-center py-24 px-[20px] min-h-[110vh]'>
-			{city === "all" ? (
-				<H1>Events in all cities</H1>
-			) : (
-				<H1>Events in {city.charAt(0).toUpperCase() + city.slice(1)}</H1>
-			)}
+			<H1>
+				{city === "all"
+					? "Events in all cities"
+					: `Events in ${city.charAt(0).toUpperCase() + city.slice(1)}`}
+			</H1>
 
 			<EventsList events={events} />
 		</main>
