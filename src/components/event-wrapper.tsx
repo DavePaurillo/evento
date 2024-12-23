@@ -1,6 +1,6 @@
-import { EventoEvent } from "@/lib/types"
 import React from "react"
 import EventsList from "./events-list"
+import { getEvents } from "@/lib/utils"
 
 export default async function EventWrapper({
 	query,
@@ -9,9 +9,6 @@ export default async function EventWrapper({
 	query: string
 	value: string
 }) {
-	const response = await fetch(
-		`https://bytegrad.com/course-assets/projects/evento/api/events?${query}=${value}`
-	)
-	const events: EventoEvent[] = await response.json()
+	const events = await getEvents(query, value)
 	return <EventsList events={events} />
 }

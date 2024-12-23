@@ -1,5 +1,5 @@
 import H1 from "@/components/h1"
-import { capitalizeFirstCharacter } from "@/lib/utils"
+import { capitalizeFirstCharacter, getEvent } from "@/lib/utils"
 import { Metadata } from "next"
 import Image from "next/image"
 import React from "react"
@@ -10,10 +10,7 @@ export async function generateMetadata({
 	params: { slug: string }
 }): Promise<Metadata> {
 	const { slug } = params
-	const response = await fetch(
-		`https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`
-	)
-	const event = await response.json()
+	const event = await getEvent(slug)
 
 	return {
 		title: event.name,
@@ -24,10 +21,7 @@ export default async function Event({
 	params,
 }: Readonly<{ params: { slug: string } }>) {
 	const { slug } = params
-	const response = await fetch(
-		`https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`
-	)
-	const event = await response.json()
+	const event = await getEvent(slug)
 
 	return (
 		<main>
