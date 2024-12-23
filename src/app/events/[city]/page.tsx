@@ -1,8 +1,24 @@
-import EventsList from "@/components/events-list"
 import H1 from "@/components/h1"
 import React, { Suspense } from "react"
 import Loading from "./loading"
 import EventWrapper from "@/components/event-wrapper"
+import { Metadata } from "next"
+import { capitalizeFirstCharacter } from "@/lib/utils"
+
+export function generateMetadata({
+	params,
+}: {
+	params: { city: string }
+}): Metadata {
+	const { city } = params
+
+	return {
+		title:
+			city === "all"
+				? "Evento - All Events"
+				: `Evento - Events in ${capitalizeFirstCharacter(city)}`,
+	}
+}
 
 export default function Events({
 	params,
@@ -14,7 +30,7 @@ export default function Events({
 			<H1 className='mb-28'>
 				{city === "all"
 					? "Events in all cities"
-					: `Events in ${city.charAt(0).toUpperCase() + city.slice(1)}`}
+					: `Events in ${capitalizeFirstCharacter(city)}`}
 			</H1>
 
 			<Suspense fallback={<Loading />}>
