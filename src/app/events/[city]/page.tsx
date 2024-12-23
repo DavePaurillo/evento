@@ -2,6 +2,7 @@ import EventsList from "@/components/events-list"
 import H1 from "@/components/h1"
 import React, { Suspense } from "react"
 import Loading from "./loading"
+import EventWrapper from "@/components/event-wrapper"
 
 export default function Events({
 	params,
@@ -17,7 +18,7 @@ export default function Events({
 			</H1>
 
 			<Suspense fallback={<Loading />}>
-				<EventsList city={city} />
+				<EventWrapper query='city' value={city} />
 			</Suspense>
 		</main>
 	)
