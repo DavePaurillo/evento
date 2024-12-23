@@ -50,7 +50,7 @@ export default async function Event({
 							Organized by <span className='italic'>{event.organizerName}</span>
 						</p>
 
-						<button className='bg-white/20 text-lg capitalize bg-blur mt-5 lg:mt-auto w-[95vw] rounded-md border-white/10 border-2 sm:w-full py-2 hover:scale-105 active:scale-[1.02] transition focus:scale-105'>
+						<button className='bg-white/20 text-lg capitalize bg-blur mt-5 lg:mt-auto w-[95vw] rounded-md border-white/10 border-2 sm:w-full py-2 state-effects'>
 							Get Tickets!
 						</button>
 					</div>
