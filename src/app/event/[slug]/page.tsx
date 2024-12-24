@@ -1,5 +1,5 @@
 import H1 from "@/components/h1"
-import { capitalizeFirstCharacter, getEvent } from "@/lib/utils"
+import { capitalizeFirstCharacter, getEvent, getEvents } from "@/lib/utils"
 import { Metadata } from "next"
 import Image from "next/image"
 import React from "react"
@@ -15,6 +15,16 @@ export async function generateMetadata({
 	return {
 		title: event.name,
 	}
+}
+
+export async function generateStaticParams() {
+	const { events } = await getEvents("city", "all")
+
+	return events.map((event) => ({
+		params: {
+			slug: event.slug,
+		},
+	}))
 }
 
 export default async function Event({
