@@ -4,6 +4,7 @@ import Loading from "./loading"
 import EventWrapper from "@/components/event-wrapper"
 import { Metadata } from "next"
 import { capitalizeFirstCharacter } from "@/lib/utils"
+import { z } from "zod"
 
 export function generateMetadata({
 	params,
@@ -20,6 +21,8 @@ export function generateMetadata({
 	}
 }
 
+const pageNumberSchema = z.coerce.number().int().positive().optional()
+
 export default function Events({
 	params,
 	searchParams,
@@ -28,7 +31,10 @@ export default function Events({
 	searchParams: { [key: string]: string | string[] | undefined }
 }>) {
 	const { city } = params
-	const page = searchParams.page || 1
+	const page = pageNumberSchema.safeParse(searchParams.page)
+	if (!page.success) {
+		throw new Error("Invalid page number")
+	}
 
 	return (
 		<main className='flex flex-col items-center py-24 px-[20px] min-h-[110vh]'>
@@ -38,8 +44,8 @@ export default function Events({
 					: `Events in ${capitalizeFirstCharacter(city)}`}
 			</H1>
 
-			<Suspense key={city + page} fallback={<Loading />}>
-				<EventWrapper query='city' value={city} page={+page} />
+			<Suspense key={city + page.data} fallback={<Loading />}>
+				<EventWrapper query='city' value={city} page={page.data} />
 			</Suspense>
 		</main>
 	)

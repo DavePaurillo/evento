@@ -9,9 +9,9 @@ export default async function EventWrapper({
 }: {
 	query: string
 	value: string
-	page: number
+	page?: number
 }) {
-	const { events, totalCount } = await getEvents(query, value, page)
+	const { events, totalCount } = await getEvents(query, value, (page = 1))
 	const previousPath = page > 1 ? `/events/${value}?page=${page - 1}` : ""
 	const nextPath =
 		totalCount > 6 * page ? `/events/${value}?page=${page + 1}` : ""
