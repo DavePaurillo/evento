@@ -13,6 +13,7 @@ export function capitalizeFirstCharacter(str: string) {
 
 export async function getEvents(query: string, value: string, page = 1) {
 	// undefined is used to fetch all events
+	// we cannot use the undefined trick for the totalCount so we created a variable for 2 different queries
 	const events = await prisma.eventoEvent.findMany({
 		where: {
 			[query]: value === "all" ? undefined : capitalizeFirstCharacter(value),

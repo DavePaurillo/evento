@@ -1,5 +1,4 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons"
-import next from "next"
 import Link from "next/link"
 import React from "react"
 
@@ -12,7 +11,6 @@ type Props = {
 }
 
 export default function PaginationControls({ previousPath, nextPath }: Props) {
-	console.log(previousPath, nextPath)
 	return (
 		<section className='flex items-center justify-between w-full'>
 			{previousPath ? (
