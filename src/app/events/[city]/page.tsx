@@ -22,8 +22,13 @@ export function generateMetadata({
 
 export default function Events({
 	params,
-}: Readonly<{ params: { city: string } }>) {
+	searchParams,
+}: Readonly<{
+	params: { city: string }
+	searchParams: { [key: string]: string | string[] | undefined }
+}>) {
 	const { city } = params
+	const page = searchParams.page || 1
 
 	return (
 		<main className='flex flex-col items-center py-24 px-[20px] min-h-[110vh]'>
@@ -33,8 +38,8 @@ export default function Events({
 					: `Events in ${capitalizeFirstCharacter(city)}`}
 			</H1>
 
-			<Suspense fallback={<Loading />}>
-				<EventWrapper query='city' value={city} />
+			<Suspense key={city + page} fallback={<Loading />}>
+				<EventWrapper query='city' value={city} page={+page} />
 			</Suspense>
 		</main>
 	)
