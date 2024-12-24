@@ -1,5 +1,6 @@
 import H1 from "@/components/h1"
-import { capitalizeFirstCharacter, getEvent, getEvents } from "@/lib/utils"
+import { getEvent, getEvents } from "@/lib/server-utils"
+
 import { Metadata } from "next"
 import Image from "next/image"
 import React from "react"
